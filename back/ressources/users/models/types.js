@@ -6,6 +6,8 @@ const saltRounds = 10
 
 const UserSchema = new Schema({
 	_id: { type: Schema.Types.ObjectId, default: mongoose.Types.ObjectId },
+	lastName: { type: String, required: true },
+	firstName: { type: String, required: true },
 	email: { type: String, unique: true },
 	phone: { type: String, unique: true, required: true },
 	password: { type: String, required: true, default: "changeme" },

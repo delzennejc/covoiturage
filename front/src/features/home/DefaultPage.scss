@@ -1,0 +1,26 @@
+@import '../../styles/mixins';
+
+html, body {
+    width: 100%;
+    height: 100vw;
+}
+
+#react-root, .home-app, .home-default-page {
+    height: inherit;
+}
+
+.home-default-page {
+    flex-grow: 1;
+}
+
+.home-default-container {
+    height: inherit;
+}
+
+.home-default-name {
+    flex-grow: 1;
+}
+
+.home-default-login-container {
+    flex-shrink: 1;
+}

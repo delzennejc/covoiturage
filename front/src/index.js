@@ -1,31 +1,32 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
+// Summary:
+//   This is the entry of the application, works together with index.html.
 
-import rootReducer from './reducers'
-import App from './containers/App.container'
-import './index.css'
+import 'babel-polyfill';
+import React from 'react';
+import { AppContainer } from 'react-hot-loader';
+import { render } from 'react-dom';
+import configStore from './common/configStore';
+import routeConfig from './common/routeConfig';
+import Root from './Root';
 
-import registerServiceWorker from './registerServiceWorker'
+const store = configStore();
 
-const enhancers = []
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+function renderApp(app) {
+  render(
+    <AppContainer>
+      {app}
+    </AppContainer>,
+    document.getElementById('react-root')
+  );
+}
 
-const store = createStore(
-  rootReducer,
-  composeEnhancers(
-    applyMiddleware(thunk),
-    ...enhancers
-  )
-)
+renderApp(<Root store={store} routeConfig={routeConfig} />);
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
-
-registerServiceWorker()
+// Hot Module Replacement API
+/* istanbul ignore if  */
+if (module.hot) {
+  module.hot.accept('./common/routeConfig', () => {
+    const nextRouteConfig = require('./common/routeConfig').default; // eslint-disable-line
+    renderApp(<Root store={store} routeConfig={nextRouteConfig} />);
+  });
+}
