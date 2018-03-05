@@ -1,0 +1,9 @@
+@import '../../styles/mixins';
+
+.common-search-radio-labels-group {
+  display: flex;
+  justify-content: space-around;
+  width: 400px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}

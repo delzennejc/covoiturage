@@ -1,5 +1,17 @@
 @import '../../styles/mixins';
 
 .travelers-default-page {
-  height: inherit;
+  height: calc(100% - 64px);
+  background-color: #eeeeee;
+}
+
+.travelers-search {
+  width: 400px;
+}
+
+.travelers-container-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

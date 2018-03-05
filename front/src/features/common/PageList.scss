@@ -1,19 +1,12 @@
 @import '../../styles/mixins';
 
 .common-page-list {
-
-}
-
-.common-page-list-list {
   display: flex;
   justify-content: center;
 }
 
-.common-page-list-item {
-  max-width: 200px;
-}
-
-.common-page-list-item-title {
-  text-align: center;
-  line-height: 180px;
+.common-page-list-list {
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
 }

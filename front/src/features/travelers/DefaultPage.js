@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 
 import PageList from '../common/PageList';
+import Search from '../common/Search';
+import SearchRadioGroup from '../common/SearchRadioGroup';
 
 export class DefaultPage extends Component {
   static propTypes = {
@@ -15,6 +17,10 @@ export class DefaultPage extends Component {
   render() {
     return (
       <div className="travelers-default-page">
+        <div className="travelers-container-top">
+          <Search />
+          <SearchRadioGroup />
+        </div>
         <PageList />
       </div>
     );

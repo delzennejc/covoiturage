@@ -19,10 +19,10 @@ const UserSchema = new Schema({
 	bloc: { type: String, required: true },
 	// carType: { type: String },
 	// noCar: { type: Boolean  },
-	fimo: { type: Boolean },
+	fimo: { type: Boolean, default: false },
 	seats: { type: Number },
 	driverLicense: ['B', 'B1', 'C1', 'D1'],
-	role: ['Driver', 'Traveller', 'Admin'],
+	role: ['driver', 'traveller', 'admin'],
 	createdAt: { type: Date, default: Date.now }
 })
 

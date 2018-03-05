@@ -6,7 +6,8 @@ const { users } = require('../ressources/users/models')
 module.exports = (passport) => {
 	const opts = {
 		jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('token'),
-		secretOrKey: secret
+		secretOrKey: secret,
+		ignoreExpiration: true
 	}
 
 	passport.use(new JwtStrategy(opts, async function (jwt_payload, done) {
