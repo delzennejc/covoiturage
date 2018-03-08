@@ -6,8 +6,8 @@ export default {
   path: '/',
   name: 'Home',
   childRoutes: [
-    { path: 'default-page',
-      name: 'Default page',
+    { path: 'login',
+      name: 'Login',
       component: DefaultPage,
       isIndex: true,
     },

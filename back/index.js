@@ -3,6 +3,7 @@ const swaggerUi = require('swagger-ui-express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const passport = require('passport')
+const cors = require('cors')
 const app = express()
 
 // import configs
@@ -13,6 +14,7 @@ const travelsRessource = require('./ressources/travels')
 const usersRessource = require('./ressources/users')
 
 // express config
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(morgan('dev'))

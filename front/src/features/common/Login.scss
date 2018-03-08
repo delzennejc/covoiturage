@@ -1,0 +1,32 @@
+@import '../../styles/mixins';
+
+.common-login {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.common-login-form {
+  width: 100%;
+  max-width: 300px;
+}
+
+.common-login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+}
+
+.common-login-title {
+  margin-bottom: 15px;
+}
+
+div.common-login-email {
+  margin-bottom: 15px;
+}
+
+div.common-login-password {
+  margin-bottom: 15px;
+}

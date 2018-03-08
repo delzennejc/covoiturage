@@ -9,7 +9,7 @@ const registerRoute = async (req, res) => {
 	try {
 		const { email, password } = req.body
 		if (email && password) {
-			const newUser = await registerUser({ email, password })
+			const newUser = await registerUser(req.body)
 			res.json({ message: 'user created' })
 		}
 		else res.status(400).json({ message: 'email and password are required' })
@@ -32,7 +32,16 @@ const authenticateRoute = async (req, res) => {
 	}
 }
 
+const getUserInfoRoute = async (req, res) => {
+	try {
+		res.json(req.user);
+	} catch (error) {
+		res.status(400).json({ message: String(error) })
+	}
+}
+
 module.exports = {
 	registerRoute,
-	authenticateRoute
+	authenticateRoute,
+	getUserInfoRoute
 }

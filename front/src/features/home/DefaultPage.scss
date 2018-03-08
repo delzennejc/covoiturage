@@ -10,7 +10,7 @@ html, body {
 }
 
 .home-default-page {
-    flex-grow: 1;
+    height: calc(100% - 64px);
 }
 
 .home-default-container {
