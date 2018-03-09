@@ -8,14 +8,14 @@ import SearchPage from '../common/SearchPage';
 
 export class DefaultPage extends Component {
   static propTypes = {
-    travelers: PropTypes.object.isRequired,
+    travels: PropTypes.object.isRequired,
     // actions: PropTypes.object.isRequired,
   };
 
   render() {
     return (
-      <div className="travelers-default-page">
-        <SearchPage entities={this.props.travelers.travelers} />
+      <div className="travels-default-page">
+        <SearchPage entities={this.props.travels.travels} isTravels />
       </div>
     );
   }
@@ -24,9 +24,9 @@ export class DefaultPage extends Component {
 /* istanbul ignore next */
 function mapStateToProps(state) {
   return {
-    travelers: {
-      ...state.travelers,
-      travelers: state.travelers.travelers.map(id => state.common.users[id])
+    travels: {
+      ...state.travels,
+      travels: state.travels.travels.map(id => state.common.travels[id])
     },
   };
 }

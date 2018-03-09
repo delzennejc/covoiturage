@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import reducer from 'src/features/travel/redux/reducer';
+import reducer from 'src/features/drivers/redux/reducer';
 
-describe('travel/redux/reducer', () => {
+describe('drivers/redux/reducer', () => {
   it('does nothing if no matched action', () => {
     const prevState = {};
     const state = reducer(

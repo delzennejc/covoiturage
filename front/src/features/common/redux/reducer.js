@@ -10,11 +10,15 @@ import initialState from './initialState';
 import { reducer as changeLoginInputReducer } from './changeLoginInput';
 import { reducer as loginReducer } from './login';
 import { reducer as loadFromTokenReducer } from './loadFromToken';
+import { reducer as getTravelsReducer } from './getTravels';
+import { reducer as getUsersReducer } from './getUsers';
 
 const reducers = [
   changeLoginInputReducer,
   loginReducer,
   loadFromTokenReducer,
+  getTravelsReducer,
+  getUsersReducer,
 ];
 
 export default function reducer(state = initialState, action) {

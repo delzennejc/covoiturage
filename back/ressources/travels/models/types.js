@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { ObjectID } = require('../../../config/mongoDb')
 
 const Schema = mongoose.Schema
 
@@ -15,6 +16,16 @@ const TravelsSchema = new Schema({
 	}]
 })
 
+TravelsSchema.pre('save', async function(next) {
+	try {
+		this.driver = new ObjectID(this.driver)
+		this.travelers = this.travelers.map(id => new ObjectID(id))
+		console.log(this)
+		next()
+	} catch (error) {
+		throw error
+	}
+})
 const TravelsModel = mongoose.model('travel', TravelsSchema)
 
 module.exports = {

@@ -5,23 +5,8 @@
 // a quick view about what data is used for the feature, at any time.
 
 // NOTE: initialState constant is necessary so that Rekit could auto add initial state when creating async actions.
-
 const initialState = {
-  userInfos: {
-    email: '',
-    password: '',
-  },
-  userDetails: null,
-  token: '',
-  loginPending: false,
-  loginError: null,
-  loadFromTokenPending: false,
-  loadFromTokenError: null,
-  travels: null,
-  getTravelsPending: false,
-  getTravelsError: null,
-  getUsersPending: false,
-  getUsersError: null
+  drivers: []
 };
 
 export default initialState;

@@ -4,16 +4,18 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 
+import SearchPage from '../common/SearchPage';
+
 export class DefaultPage extends Component {
   static propTypes = {
-    travel: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired,
+    drivers: PropTypes.object.isRequired,
+    // actions: PropTypes.object.isRequired,
   };
 
   render() {
     return (
-      <div className="travel-default-page">
-        Hello Yolo :)
+      <div className="drivers-default-page">
+        <SearchPage entities={this.props.drivers.drivers} />
       </div>
     );
   }
@@ -22,7 +24,10 @@ export class DefaultPage extends Component {
 /* istanbul ignore next */
 function mapStateToProps(state) {
   return {
-    travel: state.travel,
+    drivers: {
+      ...state.drivers,
+      drivers: state.drivers.drivers.map(id => state.common.users[id])
+    },
   };
 }
 

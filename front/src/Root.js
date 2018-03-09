@@ -58,4 +58,3 @@ export default class Root extends React.Component {
     );
   }
 }
-

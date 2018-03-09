@@ -1,6 +1,7 @@
 const { isEmpty } = require('lodash')
 
 const {
+	users,
 	registerUser,
 	authenticateUser,
 } = require('./models')
@@ -40,8 +41,18 @@ const getUserInfoRoute = async (req, res) => {
 	}
 }
 
+const getUsersRoute = async (req, res) => {
+	try {
+		const allUsers = await users()
+		res.json(allUsers)
+	} catch (error) {
+		res.status(400).json({ message: String(error) })
+	}
+}
+
 module.exports = {
 	registerRoute,
 	authenticateRoute,
-	getUserInfoRoute
+	getUserInfoRoute,
+	getUsersRoute,
 }

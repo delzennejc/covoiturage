@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import { DefaultPage } from 'src/features/travel/DefaultPage';
+import { DefaultPage } from 'src/features/travels/DefaultPage';
 
-describe('travel/DefaultPage', () => {
+describe('travels/DefaultPage', () => {
   it('renders node with correct class name', () => {
     const props = {
       travel: {},
@@ -14,7 +14,7 @@ describe('travel/DefaultPage', () => {
     );
 
     expect(
-      renderedComponent.find('.travel-default-page').getElement()
+      renderedComponent.find('.travels-default-page').getElement()
     ).to.exist;
   });
 });

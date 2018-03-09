@@ -5,7 +5,10 @@ const { UserModel } = require('./types')
 const { ObjectID } = require('../../../config/mongoDb')
 
 const users = async (id) => {
-	return await UserModel.findOne({ _id: new ObjectID(id) })
+	if (id) {
+		return UserModel.findOne({ _id: new ObjectID(id) })
+	}
+	return await UserModel.find({});
 }
 
 const registerUser = async (infos) => {

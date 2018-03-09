@@ -7,6 +7,9 @@ import {
   COMMON_LOAD_FROM_TOKEN_DISMISS_ERROR,
 } from './constants';
 
+import { getTravels } from './getTravels';
+import { getUsers } from './getUsers';
+
 // Rekit uses redux-thunk for async actions by default: https://github.com/gaearon/redux-thunk
 // If you prefer redux-saga, you can use rekit-plugin-redux-saga: https://github.com/supnate/rekit-plugin-redux-saga
 export function loadFromToken() {
@@ -29,6 +32,8 @@ export function loadFromToken() {
           type: COMMON_LOAD_FROM_TOKEN_SUCCESS,
           data,
         });
+        await dispatch(getTravels());
+        await dispatch(getUsers());
       }
     } catch (error) {
       dispatch({

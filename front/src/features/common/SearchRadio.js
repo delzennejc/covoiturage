@@ -8,15 +8,24 @@ export default class SearchRadio extends Component {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
+    checked: PropTypes.bool.isRequired,
+    onChange: PropTypes.func,
+    onClick: PropTypes.func,
   };
+
+  static defaultProps = {
+    onChange: null,
+    onClick: null
+  }
 
   render() {
     return (
       <div className="common-search-radio-labels">
         <InputLabel>{this.props.label}</InputLabel>
         <Radio
-          /* checked={this.state.selectedValue === 'a'}
-          onChange={this.handleChange} */
+          onChange={this.props.onChange}
+          onClick={this.props.onClick}
+          checked={this.props.checked}
           value={this.props.value}
           name={this.props.name}
         />

@@ -1,34 +1,37 @@
 import api from '../../../api';
 import {
-  COMMON_LOGIN_BEGIN,
-  COMMON_LOGIN_SUCCESS,
-  COMMON_LOAD_FROM_TOKEN_SUCCESS,
-  COMMON_LOGIN_FAILURE,
-  COMMON_LOGIN_DISMISS_ERROR,
+  COMMON_GET_TRAVELS_BEGIN,
+  COMMON_GET_TRAVELS_SUCCESS,
+  COMMON_GET_TRAVELS_FAILURE,
+  COMMON_GET_TRAVELS_DISMISS_ERROR,
 } from './constants';
 
-import { loadFromToken } from './loadFromToken';
+import {
+  TRAVELS_LOAD_TRAVELS
+} from '../../travels/redux/constants';
 
 // Rekit uses redux-thunk for async actions by default: https://github.com/gaearon/redux-thunk
 // If you prefer redux-saga, you can use rekit-plugin-redux-saga: https://github.com/supnate/rekit-plugin-redux-saga
-export function login() {
+export function getTravels() {
   return async (dispatch, getState) => { // optionally you can have getState as the second argument
     try {
       dispatch({
-        type: COMMON_LOGIN_BEGIN,
+        type: COMMON_GET_TRAVELS_BEGIN,
       });
       // replace this by the request you need to do
-      const { common: { userInfos } } = getState();
-      const { data } = await api.post('/users/authenticate', userInfos);
-      localStorage.setItem('token', data.token); // eslint-disable-line
+      const { common: { token } } = getState();
+      const { data } = await api.get('/travels', { headers: { Authorization: token } });
       dispatch({
-        type: COMMON_LOGIN_SUCCESS,
+        type: COMMON_GET_TRAVELS_SUCCESS,
         data,
       });
-      dispatch(loadFromToken(data.token));
+      dispatch({
+        type: TRAVELS_LOAD_TRAVELS,
+        travels: data,
+      });
     } catch (error) {
       dispatch({
-        type: COMMON_LOGIN_FAILURE,
+        type: COMMON_GET_TRAVELS_FAILURE,
         data: { error },
       });
     }
@@ -37,44 +40,44 @@ export function login() {
 
 // Async action saves request error by default, this method is used to dismiss the error info.
 // If you don't want errors to be saved in Redux store, just ignore this method.
-export function dismissLoginError() {
+export function dismissGetTravelsError() {
   return {
-    type: COMMON_LOGIN_DISMISS_ERROR,
+    type: COMMON_GET_TRAVELS_DISMISS_ERROR,
   };
 }
 
 export function reducer(state, action) {
   switch (action.type) {
-    case COMMON_LOGIN_BEGIN:
+    case COMMON_GET_TRAVELS_BEGIN:
       // Just after a request is sent
       return {
         ...state,
-        loginPending: true,
-        loginError: null,
+        getTravelsPending: true,
+        getTravelsError: null,
       };
 
-    case COMMON_LOGIN_SUCCESS:
+    case COMMON_GET_TRAVELS_SUCCESS:
       // The request is success
       return {
         ...state,
-        token: action.data.token,
-        loginPending: false,
-        loginError: null,
+        travels: action.data.reduce((acc, tl) => ({ ...acc, [tl._id]: tl }), {}),
+        getTravelsPending: false,
+        getTravelsError: null,
       };
 
-    case COMMON_LOGIN_FAILURE:
+    case COMMON_GET_TRAVELS_FAILURE:
       // The request is failed
       return {
         ...state,
-        loginPending: false,
-        loginError: action.data.error,
+        getTravelsPending: false,
+        getTravelsError: action.data.error,
       };
 
-    case COMMON_LOGIN_DISMISS_ERROR:
+    case COMMON_GET_TRAVELS_DISMISS_ERROR:
       // Dismiss the request failure error
       return {
         ...state,
-        loginError: null,
+        getTravelsError: null,
       };
 
     default:

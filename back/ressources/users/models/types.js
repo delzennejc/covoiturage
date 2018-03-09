@@ -22,7 +22,7 @@ const UserSchema = new Schema({
 	fimo: { type: Boolean, default: false },
 	seats: { type: Number },
 	driverLicense: ['B', 'B1', 'C1', 'D1'],
-	role: ['driver', 'traveller', 'admin'],
+	role: ['driver', 'traveler', 'admin'],
 	createdAt: { type: Date, default: Date.now }
 })
 
