@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
 import { withFormsy } from 'formsy-react';
+import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 
 class TextInput extends Component {
   static propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    className: PropTypes.string,
+
+    setValue: PropTypes.func.isRequired,
+    getValue: PropTypes.func.isRequired,
+    getErrorMessage: PropTypes.func.isRequired,
   };
+
+  static defaultProps = {
+    type: 'text',
+    className: ''
+  }
 
   constructor(props) {
     super(props);
@@ -22,9 +37,8 @@ class TextInput extends Component {
   render() {
     // An error message is returned only if the component is invalid
     const errorMessage = this.props.getErrorMessage();
- 
     return (
-      <div>
+      <div className="common-text-input">
         <TextField
           id={this.props.id}
           name={this.props.name}
@@ -33,8 +47,9 @@ class TextInput extends Component {
           className={this.props.className}
           onChange={this.changeValue}
           value={this.props.getValue() || ''}
+          error={(errorMessage !== null)}
         />
-        <span>{errorMessage}</span>
+        <span className="common-text-input-error">{errorMessage}</span>
       </div>
     );
   }

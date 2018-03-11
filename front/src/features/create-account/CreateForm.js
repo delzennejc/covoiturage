@@ -10,7 +10,7 @@ import Radio, { RadioGroup } from 'material-ui/Radio';
 import Select from 'material-ui/Select';
 import { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
-import { FormControl, FormControlLabel } from 'material-ui/Form';
+import { FormLabel, FormControl, FormControlLabel } from 'material-ui/Form';
 
 import * as actions from './redux/actions';
 import TextInput from '../common/TextInput';
@@ -59,17 +59,20 @@ export class CreateForm extends Component {
             spacing={24}
             alignItems="center"
             direction="row"
-            justify="center">
-            <RadioGroup
-              aria-label="userType"
-              name="userType"
-              value={this.state.userType}
-              onChange={this.handleChange}
-              style={{ flexDirection: 'row' }}
-            >
-              <FormControlLabel value="driver" control={<Radio />} label="Conducteur" />
-              <FormControlLabel value="traveler" control={<Radio />} label="Voyageur" />
-            </RadioGroup>
+            justify="flex-start">
+            <Grid item xs={12} sm={6}>
+              <FormLabel component="legend">Type de compte :</FormLabel>
+              <RadioGroup
+                aria-label="userType"
+                name="userType"
+                value={this.state.userType}
+                onChange={this.handleChange}
+                style={{ flexDirection: 'row' }}
+              >
+                <FormControlLabel value="driver" control={<Radio />} label="Conducteur" />
+                <FormControlLabel value="traveler" control={<Radio />} label="Voyageur" />
+              </RadioGroup>
+            </Grid>
           </Grid>
           <Grid container spacing={24}>
             <Grid item xs={12} sm={6}>
@@ -101,6 +104,8 @@ export class CreateForm extends Component {
                 label="Email"
                 value={this.state.email}
                 className="create-account-textfield"
+                validations="isEmail"
+                validationError="Adresse invalide"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -110,6 +115,8 @@ export class CreateForm extends Component {
                 label="Numéro de téléphone"
                 value={this.state.phone}
                 className="create-account-textfield"
+                validations="isLength:10"
+                validationError="Numéro invalide"
                 required
               />
             </Grid>
@@ -146,6 +153,8 @@ export class CreateForm extends Component {
                 label="Code postal"
                 value={this.state.postalCode}
                 className="create-account-textfield"
+                validations="isLength:5"
+                validationError="Code postal invalide"
                 required
               />
             </Grid>
