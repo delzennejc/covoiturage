@@ -40,13 +40,14 @@ export class DefaultPage extends Component {
   render() {
     return (
       <div className="home-default-page">
-        {!this.props.common.token && <Login
+        {!this.props.common.token &&
+        <Login
           email={this.props.common.userInfos.email}
           password={this.props.common.userInfos.password}
           onSubmit={this.onSubmit}
           onChange={this.onChange}
         />}
-        {this.props.common.token && <p>You are connected</p>}
+        {this.props.common.token && <p>...</p>}
       </div>
     );
   }

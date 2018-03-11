@@ -11,6 +11,9 @@ const initialState = {
     email: '',
     password: '',
   },
+  search: {
+    value: '',
+  },
   userDetails: null,
   token: '',
   loginPending: false,

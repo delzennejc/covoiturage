@@ -1,8 +1,8 @@
+import { push } from 'react-router-redux';
 import api from '../../../api';
 import {
   COMMON_LOGIN_BEGIN,
   COMMON_LOGIN_SUCCESS,
-  COMMON_LOAD_FROM_TOKEN_SUCCESS,
   COMMON_LOGIN_FAILURE,
   COMMON_LOGIN_DISMISS_ERROR,
 } from './constants';
@@ -25,7 +25,8 @@ export function login() {
         type: COMMON_LOGIN_SUCCESS,
         data,
       });
-      dispatch(loadFromToken(data.token));
+      await dispatch(loadFromToken());
+      dispatch(push('/travels'));
     } catch (error) {
       dispatch({
         type: COMMON_LOGIN_FAILURE,

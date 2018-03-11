@@ -23,6 +23,22 @@ export class DefaultPage extends Component {
 
 /* istanbul ignore next */
 function mapStateToProps(state) {
+  const searchValue = state.common.search.value.toLowerCase();
+  if (searchValue) {
+    return {
+      travelers: {
+        ...state.travelers,
+        travelers: state.travelers.travelers
+          .map(id => state.common.users[id])
+          .filter(tl => (
+            tl.firstName.toLowerCase().includes(searchValue) ||
+            tl.lastName.toLowerCase().includes(searchValue) ||
+            tl.postalCode.toLowerCase().includes(searchValue) ||
+            tl.meetingPlace.toLowerCase().includes(searchValue)
+          ))
+      },
+    };
+  }
   return {
     travelers: {
       ...state.travelers,

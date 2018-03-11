@@ -21,6 +21,7 @@ import history from '../../common/history';
 class App extends Component {
   static propTypes = {
     children: PropTypes.node,
+    common: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   };
 
@@ -44,18 +45,31 @@ class App extends Component {
             <Typography className="home-default-name" variant="title" color="inherit">
               Covoiturage
             </Typography>
+            {!this.props.common.userDetails &&
             <Button
               color="inherit"
               onClick={() => history.push('/login')}
             >
               Login
-            </Button>
+            </Button>}
+            {this.props.common.userDetails &&
+            <Typography variant="body1" color="inherit">
+              Bonjour, {this.props.common.userDetails.firstName}
+            </Typography>}
           </Toolbar>
         </AppBar>
         {this.props.children}
       </div>
     );
   }
+}
+
+/* istanbul ignore next */
+function mapStateToProps(state) {
+  return {
+    home: state.home,
+    common: state.common,
+  };
 }
 
 /* istanbul ignore next */
@@ -66,6 +80,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  () => ({}),
+  mapStateToProps,
   mapDispatchToProps
 )(App);

@@ -13,14 +13,14 @@ class SearchRadioGroup extends Component {
     return (
       <div className="common-search-radio-labels-group">
         <SearchRadio
-          label="Conducteur"
+          label="Conducteurs"
           name="driver"
           value="driver"
           checked={this.props.location.pathname === '/drivers'}
           onClick={() => this.props.history.push('/drivers')}
         />
         <SearchRadio
-          label="Voyageur"
+          label="Voyageurs"
           name="traveler"
           value="traveler"
           checked={this.props.location.pathname === '/travelers'}
