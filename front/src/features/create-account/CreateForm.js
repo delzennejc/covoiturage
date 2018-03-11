@@ -50,7 +50,6 @@ export class CreateForm extends Component {
   }
 
   render() {
-    console.log('state : ', this.state);
     return (
       <div className="create-account-create-form">
         <Formsy onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton} onChange={this.handleChange}>
@@ -141,6 +140,7 @@ export class CreateForm extends Component {
                 type="password"
                 value={this.state.confirmation}
                 className="create-account-textfield"
+                validations="equalsField:password"
                 required
               />
             </Grid>
