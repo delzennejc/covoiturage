@@ -5,3 +5,4 @@ export { default as SearchRadioGroup } from './SearchRadioGroup';
 export { default as SearchRadio } from './SearchRadio';
 export { default as Login } from './Login';
 export { default as SearchPage } from './SearchPage';
+export { default as TextInput } from './TextInput';
