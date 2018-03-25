@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withFormsy } from 'formsy-react';
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl, FormHelperText } from 'material-ui/Form';
 
 class TextInput extends Component {
   static propTypes = {
@@ -25,7 +26,6 @@ class TextInput extends Component {
     super(props);
     this.changeValue = this.changeValue.bind(this);
   }
- 
   changeValue(event) {
     // setValue() will set the value of the component, which in
     // turn will validate it and the rest of the form
@@ -33,24 +33,22 @@ class TextInput extends Component {
     // for Formsy to work.
     this.props.setValue(event.currentTarget.value);
   }
- 
   render() {
     // An error message is returned only if the component is invalid
     const errorMessage = this.props.getErrorMessage();
     return (
-      <div className="common-text-input">
-        <TextField
+      <FormControl className={this.props.className}>
+        <InputLabel htmlFor={this.props.id}>{this.props.label}</InputLabel>
+        <Input
           id={this.props.id}
           name={this.props.name}
-          label={this.props.label}
           type={this.props.type}
-          className={this.props.className}
           onChange={this.changeValue}
           value={this.props.getValue() || ''}
           error={(errorMessage !== null)}
         />
-        <span className="common-text-input-error">{errorMessage}</span>
-      </div>
+        <FormHelperText className="common-text-input-error">{errorMessage}</FormHelperText>
+      </FormControl>
     );
   }
 }
