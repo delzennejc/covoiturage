@@ -8,7 +8,7 @@ const users = async (id) => {
 	if (id) {
 		return UserModel.findOne({ _id: new ObjectID(id) })
 	}
-	return await UserModel.find({});
+	return UserModel.find({});
 }
 
 const registerUser = async (infos) => {

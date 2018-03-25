@@ -5,6 +5,10 @@
   margin-bottom: 10px;
 }
 
+.common-page-list-item-title::hover {
+    cursor: pointer;
+}
+
 .common-page-list-item-title {
   text-align: center;
   max-width: 150px;

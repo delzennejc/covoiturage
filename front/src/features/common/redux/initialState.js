@@ -15,6 +15,7 @@ const initialState = {
     value: '',
   },
   userDetails: null,
+  users: [],
   token: '',
   loginPending: false,
   loginError: null,
