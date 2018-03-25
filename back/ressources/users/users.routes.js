@@ -10,8 +10,8 @@ const registerRoute = async (req, res) => {
 	try {
 		const { email, password } = req.body
 		if (email && password) {
-			const newUser = await registerUser(req.body)
-			res.json({ message: 'user created' })
+			const user = await registerUser(req.body)
+			res.json({ user })
 		}
 		else res.status(400).json({ message: 'email and password are required' })
 	} catch (error) {

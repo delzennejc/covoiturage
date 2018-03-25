@@ -14,7 +14,7 @@ export class DefaultPage extends Component {
   render() {
     return (
       <div className="create-account-default-page">
-        <CreateForm/>
+        <CreateForm />
       </div>
     );
   }

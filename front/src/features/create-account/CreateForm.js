@@ -16,16 +16,17 @@ import * as actions from './redux/actions';
 import TextInput from '../common/TextInput';
 
 
-export class CreateForm extends Component {
+class CreateForm extends Component {
   static propTypes = {
     createAccount: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   };
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.disableButton = this.disableButton.bind(this);
     this.enableButton = this.enableButton.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.submit = this.submit.bind(this);
     this.state = { canSubmit: false, driverLicense: '' };
   }
 
@@ -42,11 +43,15 @@ export class CreateForm extends Component {
   }
 
   enableButton() {
-    this.setState({ canSubmit: (this.state.userType !== undefined) });
+    this.setState({ canSubmit: (this.state.role !== undefined) });
   }
 
   submit(form) {
-    console.log('submitted : ', form);
+    const user = form;
+    // TODO : remove following assignements once related fields linked to formsy
+    user.role = this.state.role;
+    user.driverLicense = this.state.driverLicense;
+    this.props.actions.createAccount(user);
   }
 
   render() {
@@ -62,9 +67,9 @@ export class CreateForm extends Component {
             <Grid item xs={12} sm={6}>
               <FormLabel component="legend">Type de compte :</FormLabel>
               <RadioGroup
-                aria-label="userType"
-                name="userType"
-                value={this.state.userType}
+                aria-label="role"
+                name="role"
+                value={this.state.role}
                 onChange={this.handleChange}
                 style={{ flexDirection: 'row' }}
               >
@@ -77,7 +82,7 @@ export class CreateForm extends Component {
             <Grid item xs={12} sm={6}>
               <TextInput
                 id="firstname"
-                name="firstname"
+                name="firstName"
                 label="Prénom"
                 value={this.state.firstname}
                 className="create-account-textfield"
@@ -87,7 +92,7 @@ export class CreateForm extends Component {
             <Grid item xs={12} sm={6}>
               <TextInput
                 id="lastname"
-                name="lastname"
+                name="lastName"
                 label="Nom"
                 value={this.state.lastname}
                 className="create-account-textfield"
@@ -207,7 +212,7 @@ export class CreateForm extends Component {
               />
             </Grid>
           </Grid>
-          {(this.state.userType === 'driver') &&
+          {(this.state.role === 'driver') &&
             <Grid container spacing={24}>
               <Grid item xs={12} sm={6}>
                 <FormControl className="create-account-small-textfield">
@@ -250,7 +255,7 @@ export class CreateForm extends Component {
             direction="row"
             justify="center"
             style={{ padding: 50 }}>
-            <Button variant="raised" size="large" color="primary" disabled={!this.state.canSubmit}>
+            <Button type="submit" variant="raised" size="large" color="primary" disabled={!this.state.canSubmit}>
               Enregistrer
             </Button>
           </Grid>

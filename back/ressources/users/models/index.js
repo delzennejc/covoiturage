@@ -14,7 +14,7 @@ const users = async (id) => {
 const registerUser = async (infos) => {
 	const user = new UserModel(infos)
 	await user.save()
-	return true
+	return users(user.id)
 }
 
 const authenticateUser = async (infos) => {

@@ -13,6 +13,7 @@ import { reducer as loadFromTokenReducer } from './loadFromToken';
 import { reducer as getTravelsReducer } from './getTravels';
 import { reducer as getUsersReducer } from './getUsers';
 import { reducer as searchEntityReducer } from './searchEntity';
+import { reducer as createAccountReducer } from './createAccount';
 
 const reducers = [
   changeLoginInputReducer,
@@ -21,6 +22,7 @@ const reducers = [
   getTravelsReducer,
   getUsersReducer,
   searchEntityReducer,
+  createAccountReducer,
 ];
 
 export default function reducer(state = initialState, action) {

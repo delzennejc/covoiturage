@@ -4,6 +4,7 @@ import {
   COMMON_GET_USERS_SUCCESS,
   COMMON_GET_USERS_FAILURE,
   COMMON_GET_USERS_DISMISS_ERROR,
+  COMMON_CREATE_ACCOUNT,
 } from './constants';
 
 import {
@@ -61,6 +62,15 @@ export function reducer(state, action) {
         ...state,
         getUsersPending: true,
         getUsersError: null,
+      };
+
+    case COMMON_CREATE_ACCOUNT:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          [action.user._id]: action.user,
+        }
       };
 
     case COMMON_GET_USERS_SUCCESS:
