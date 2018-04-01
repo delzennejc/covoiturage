@@ -6,6 +6,7 @@ import travelsReducer from '../features/travels/redux/reducer';
 import travelersReducer from '../features/travelers/redux/reducer';
 import createAccountReducer from '../features/create-account/redux/reducer';
 import driversReducer from '../features/drivers/redux/reducer';
+import createTravelReducer from '../features/create-travel/redux/reducer';
 
 // NOTE 1: DO NOT CHANGE the 'reducerMap' name and the declaration pattern.
 // This is used for Rekit cmds to register new features, remove features, etc.
@@ -20,6 +21,7 @@ const reducerMap = {
   travelers: travelersReducer,
   createAccount: createAccountReducer,
   drivers: driversReducer,
+  createTravel: createTravelReducer,
 };
 
 export default combineReducers(reducerMap);

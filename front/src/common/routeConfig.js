@@ -6,6 +6,7 @@ import travelsRoute from '../features/travels/route';
 import travelersRoute from '../features/travelers/route';
 import createAccountRoute from '../features/create-account/route';
 import driversRoute from '../features/drivers/route';
+import createTravelRoute from '../features/create-travel/route';
 
 // NOTE: DO NOT CHANGE the 'childRoutes' name and the declaration pattern.
 // This is used for Rekit cmds to register routes config for new features, and remove config when remove features, etc.
@@ -16,6 +17,7 @@ const childRoutes = [
   travelersRoute,
   createAccountRoute,
   driversRoute,
+  createTravelRoute,
 ];
 
 const routes = [{
