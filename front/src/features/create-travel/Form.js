@@ -41,6 +41,8 @@ export class Form extends Component {
 
   submit(form) {
     const travel = form;
+    travel.driver = {};
+    travel.travelers = [];
     this.props.actions.createTravel(travel);
   }
 
