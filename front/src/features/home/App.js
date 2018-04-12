@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import AppBar from 'material-ui/AppBar';
+import Menu, { MenuItem } from 'material-ui/Menu';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -29,17 +30,43 @@ class App extends Component {
     children: '',
   };
 
+  state = {
+    auth: true,
+    anchorEl: null,
+  };
   componentWillMount() {
     // load the token from localstorage
     this.props.actions.loadFromToken();
   }
 
+  handleChange = (event, checked) => {
+    this.setState({ auth: checked });
+  };
+
+  handleMenu = (event) => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = (page) => {
+    history.push(`/${page}`);
+    this.setState({ anchorEl: null });
+  };
+
   render() {
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
+
     return (
       <div className="home-app">
         <AppBar position="static">
           <Toolbar>
-            <IconButton color="inherit" aria-label="Menu">
+            <IconButton
+              aria-label="Menu" 
+              aria-owns={open ? 'menu-appbar' : null}
+              aria-haspopup="true"
+              onClick={this.handleMenu}
+              color="inherit"
+            >
               <MenuIcon />
             </IconButton>
             <Typography className="home-default-name" variant="title" color="inherit">
@@ -52,10 +79,24 @@ class App extends Component {
             >
               Login
             </Button>}
-            {this.props.common.userDetails &&
-            <Typography variant="body1" color="inherit">
-              Bonjour, {this.props.common.userDetails.firstName}
-            </Typography>}
+            {this.props.common.userDetails && 
+            <div>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={this.handleClose}
+              >
+                <MenuItem onClick={() => this.handleClose('create-travel')}>Ajouter un voyage</MenuItem>
+                <MenuItem onClick={() => this.handleClose('create-account')}>Ajouter un utilisateur</MenuItem>
+                <MenuItem onClick={() => this.handleClose('travels')}>Voyages</MenuItem>
+                <MenuItem onClick={() => this.handleClose('drivers')}>Conducteur</MenuItem>
+                <MenuItem onClick={() => this.handleClose('travelers')}>Voyageurs</MenuItem>
+              </Menu>
+              <Typography variant="body1" color="inherit">
+                Bonjour, {this.props.common.userDetails.firstName}
+              </Typography>
+            </div>}
           </Toolbar>
         </AppBar>
         {this.props.children}
