@@ -32,7 +32,6 @@ const routes = [{
 // Handle isIndex property of route config:
 //  Dupicate it and put it as the first route rule.
 function handleIndexRoute(route) {
-  console.log('route : ', route);
   if (!route.childRoutes || !route.childRoutes.length) {
     return;
   }
