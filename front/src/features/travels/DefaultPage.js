@@ -2,20 +2,26 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from './redux/actions';
+import qs from 'query-string';
 
+import * as actions from './redux/actions';
 import SearchPage from '../common/SearchPage';
+import SelectUser from '../common/SelectUser';
 
 export class DefaultPage extends Component {
   static propTypes = {
     travels: PropTypes.object.isRequired,
+    travelId: PropTypes.string.isRequired
     // actions: PropTypes.object.isRequired,
   };
 
   render() {
     return (
       <div className="travels-default-page">
-        <SearchPage entities={this.props.travels.travels} isTravels />
+        {this.props.travelId
+          ? <SelectUser />
+          : <SearchPage entities={this.props.travels.travels} isTravels />
+        }
       </div>
     );
   }
@@ -24,8 +30,10 @@ export class DefaultPage extends Component {
 /* istanbul ignore next */
 function mapStateToProps(state) {
   const searchValue = state.common.search.value.toLowerCase();
+  const { id: travelId } = qs.parse(state.router.location.search);
   if (searchValue) {
     return {
+      travelId,
       travels: {
         ...state.travels,
         travels: state.travels.travels
@@ -41,6 +49,7 @@ function mapStateToProps(state) {
     };
   }
   return {
+    travelId,
     travels: {
       ...state.travels,
       travels: state.travels.travels.map(id => state.common.travels[id])
